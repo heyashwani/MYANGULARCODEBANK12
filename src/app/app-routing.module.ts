@@ -1,7 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CountryDropdownComponent } from './country-dropdown/country-dropdown.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:"",
+    redirectTo:"country-dropdown",
+    pathMatch:"full"
+  },
+  {
+    path:"country-dropdown",
+    component:CountryDropdownComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

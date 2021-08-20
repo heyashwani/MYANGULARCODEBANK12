@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <ul>
+                    <li>Step 1: Run "npm install intl-tel-input@17.0.3 --save"</li>
+                    <li>Step 2: Run "npm install google-libphonenumber --save"</li>
+                    <li>Step 3: Run "ng add ngx-bootstrap"</li>
+                    <li>Step 4: Update angular.json's style array with "./node_modules/intl-tel-input/build/css/intlTelInput.css"</li>
+                    <li>Step 5: Run "npm install ngx-intl-tel-input --save"</li>
+                    <li>Step 6: Update app.module.ts. import "NgxIntlTelInputModule" module.</li>
+                    <li>Step 7: Now u can implement dropdown. check code blow.</li>
+                </ul>
+                <p><strong><a href="https://www.npmjs.com/package/ngx-intl-tel-input" target="_blank">Get Full Reference</a></strong></p>
+            </div>
+
+
+            <form  [formGroup]="phoneForm" (submit)="onSubmit()">
+                <ngx-intl-tel-input 
+                    [cssClass]="'custom'"
+                        [preferredCountries]="preferredCountries"
+                    [enableAutoCountrySelect]="true"
+                    [enablePlaceholder]="true" 
+                    [searchCountryFlag]="true"
+                    [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                    [selectFirstCountry]="false"
+                    [selectedCountryISO]="CountryISO.India" 
+                    [maxLength]="'10'"
+            
+                    [phoneValidation]="false"
+                    [separateDialCode]="separateDialCode"
+                    [numberFormat]="PhoneNumberFormat.National" 
+                    name="mobile" formControlName="mobile">
+                </ngx-intl-tel-input>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
