@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <ul>
+                    <li>Step 1: Download <a href="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js" target="_blank">https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js</a> this file and save in assets>js folder or as u wish.</li>
+                    <li>Step 2: Update angular.json's script array with "src/assets/js/annyang.min.js"</li>
+                    <li>Step 3: Copy html and ts code and paste in your project.</li>
+                </ul>
+                <p><strong><a href="https://codezup.com/convert-speech-to-text-in-angular-speech-recognition-ui/" target="_blank">Get Full Reference</a></strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div *ngIf="voiceActiveSectionDisabled; else voicesection;">
+                <button type="button" (click)="startVoiceRecognition()">Record</button>
+              </div>
+              <ng-template #voicesection>
+                <ng-container *ngIf="!voiceActiveSectionError; else failure">
+                  <ng-container *ngIf="voiceText; else start">
+                      <span>{{voiceText}}</span>
+                  </ng-container>
+                  <ng-template #start>
+                    <ng-container
+                      *ngIf="voiceActiveSectionListening; else beginning">
+                      <span>Listening...</span>
+                    </ng-container>
+                    <ng-template #beginning>
+                      <span>Start talking...</span>
+                    </ng-template>
+                  </ng-template>
+                </ng-container>
+                <ng-template #failure>
+                  <span>Didn't catch that</span>
+                </ng-template>
+                <div>
+                  <button (click)="closeVoiceRecognition()">Close</button>
+                  <button (click)="startVoiceRecognition()">Restart</button>
+                </div>
+              </ng-template>
+        </div>
+    </div>
+</div>
