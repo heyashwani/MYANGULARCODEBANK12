@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="jumbotron">
+                <ul>
+                    <li>Step 1: Run "npm install --save ngx-material-timepicker"</li>
+                    <li>Step 2: Import "NgxMaterialTimepickerModule" in app.module.ts</li>
+                    <li>Step 3: Now check code of this file.</li>
+                </ul>
+               
+                <p><strong><a href="https://www.npmjs.com/package/ngx-material-timepicker" target="_blank">Get Full Reference</a></strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <input [ngxTimepicker]="picker" [(ngModel)]="startTime" (blur)="getTime()">
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+        </div>
+    </div>
+</div>

@@ -6,14 +6,27 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CountryDropdownComponent } from './country-dropdown/country-dropdown.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpeechRecognitionComponent } from './speech-recognition/speech-recognition.component';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { TimePickerComponent } from './time-picker/time-picker.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { SlickCrouselComponent } from './slick-crousel/slick-crousel.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { OwlCrouselComponent } from './owl-crousel/owl-crousel.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     CountryDropdownComponent,
     SpeechRecognitionComponent,
+    LoadingBarComponent,
+    TimePickerComponent,
+    SlickCrouselComponent,
+    OwlCrouselComponent
     
   ],
   imports: [
@@ -21,8 +34,13 @@ import { SpeechRecognitionComponent } from './speech-recognition/speech-recognit
     AppRoutingModule,
     NgxIntlTelInputModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    LoadingBarRouterModule,
+    NgxMaterialTimepickerModule,
+    FormsModule,
+    SlickCarouselModule,
+    CarouselModule  
+],
   providers: [],
   bootstrap: [AppComponent]
 })
