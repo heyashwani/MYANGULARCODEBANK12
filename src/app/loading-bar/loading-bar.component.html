@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
     <div class="row">
         <div class="col-sm-12">
             <div class="jumbotron">
@@ -13,29 +13,5 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div style="text-align:center"> 
-                <button (click)="load()">Load</button> 
-                <button (click)="playPause()">Play/Pause</button> 
-                <button (click)="mute()">Mute</button> 
-                <button (click)="unmute()">Unmute</button> 
-                <button (click)="fast()">Fast </button> 
-                <button (click)="slow()">Slow</button> 
-                
-                <button class="large awesome" (click)="fastGo()">Skip By 10 Sec</button>
-                <button class="large awesome" (click)="fastBack()">Back By 10 Sec</button>
-                <a href="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4" download>Download video</a>
-
-                <br><br>
-                <video id="video1" controls width="420">
-                  <source src="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4" type="video/mp4">
-                  <source src="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4" type="video/ogg">
-                  <track src="fgsubtitles_en.vtt" kind="subtitles" srclang="en" label="English">
-                  <track src="fgsubtitles_no.vtt" kind="subtitles" srclang="no" label="Norwegian">
-                </video>
-              </div> 
-          
-        </div>
-    </div>
+    
 </div>
