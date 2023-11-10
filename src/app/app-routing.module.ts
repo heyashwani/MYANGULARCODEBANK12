@@ -9,6 +9,7 @@ import { SlickCrouselComponent } from './slick-crousel/slick-crousel.component';
 import { SpeechRecognitionComponent } from './speech-recognition/speech-recognition.component';
 import { TimePickerComponent } from './time-picker/time-picker.component';
 import { VideoPlayerComponent } from './video-player/video-player.component';
+import { VideoTestComponent } from './video-test/video-test.component';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
 
 const routes: Routes = [
@@ -52,6 +53,10 @@ const routes: Routes = [
   {
     path:"virtual-scroll",
     component:VirtualScrollComponent
+  },
+  {
+    path:"Video-Test",
+    component:VideoTestComponent
   },
 ];
 

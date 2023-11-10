@@ -1,3 +1,11 @@
+
+<div *ngIf="message;">
+	<h1>{{ message.notification.title }}</h1>
+	<h2>{{ message.notification.body }}</h2>
+  </div>
+  <div *ngIf="!message;">
+	No Message Arrived
+  </div>
 <div>
 	<button (click)="pageRedirect('time-picker')">Time Picker</button>
 	<button (click)="pageRedirect('speech-recognition')">Speech Recognition</button>
@@ -10,6 +18,7 @@
 	<button (click)="pageRedirect('video-player')">Video Player</button>
 	<button (click)="pageRedirect('agm')">AGM Map</button>
 	<button (click)="pageRedirect('virtual-scroll')">Virtual Scroll</button>
+	<button (click)="pageRedirect('Video-Test')">Video Test</button>
 </div>
 
 

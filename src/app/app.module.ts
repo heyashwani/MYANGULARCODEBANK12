@@ -21,7 +21,20 @@ import { AgmCoreModule } from '@agm/core';
 import { VideoPlayerComponent } from './video-player/video-player.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.component';
+import { environment } from "../environments/environment";
+import { initializeApp } from "firebase/app";
+initializeApp(environment.firebase);
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
+
+import {MatIconModule} from '@angular/material/icon';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { VideoTestComponent} from './video-test/video-test.component'
 
 
 @NgModule({
@@ -35,7 +48,8 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
     OwlCrouselComponent,
     AgmMapComponent,
     VideoPlayerComponent,
-    VirtualScrollComponent
+    VirtualScrollComponent,
+    VideoTestComponent
     
   ],
   imports: [
@@ -55,9 +69,39 @@ import { VirtualScrollComponent } from './virtual-scroll/virtual-scroll.componen
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
       apiKey: 'AIzaSyBUkyuGdePPVO7oCQp3r3IcYyvHwdf0vcw'
     }),
-    ScrollingModule
+    ScrollingModule,
+    SocialLoginModule,
+    MatIconModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
+    
 ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              // '632570983894-o5f77ong47uacvg6h23636aevuvucfj0.apps.googleusercontent.com'
+              '312897153603-m7r1cikgc63r8hgrivq7pjsavkrb7uhn.apps.googleusercontent.com'
+              
+              )
+          },
+          
+        ],
+        onError: (err) => {
+          console.error("ddd",err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

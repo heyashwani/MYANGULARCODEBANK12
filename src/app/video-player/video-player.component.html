@@ -1,5 +1,8 @@
-<div class="row mt-5">
-    <div class="col-sm-12">
+
+
+
+<div class="row mt-5" >
+    <div class="col-sm-12" style="margin-bottom:300px;">
         <div style="text-align:center"> 
             <button (click)="load()">Load</button> 
             <button (click)="playPause()">Play/Pause</button> 
@@ -13,12 +16,137 @@
             <a href="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4" download>Download video</a>
 
             <br><br>
-            <video id="video1" controls width="420">
-              <source src="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4" type="video/mp4">
-              <source src="https://www.rmp-streaming.com/media/big-buck-bunny-360p.mp4" type="video/ogg">
-              <track src="fgsubtitles_en.vtt" kind="subtitles" srclang="en" label="English">
-              <track src="fgsubtitles_no.vtt" kind="subtitles" srclang="no" label="Norwegian">
-            </video>
+
+            <canvas ></canvas>
+            
+            
+
+            <div id="ask_video_container" class="ask_video_container">
+              <video id="video1" (timeupdate)="onTimeUpdate()" (loadedmetadata)="onMetaDataLoad()">
+                <source src="{{recievedData.url}}" type="video/mp4">
+                <track src="fgsubtitles_en.vtt" kind="subtitles" srclang="en" label="English">
+                <track src="fgsubtitles_no.vtt" kind="subtitles" srclang="no" label="Norwegian">
+              </video>
+              <div class="ask_video_controls_container">
+                <div id="ask_progress_container" class="ask_progress_container" (click)="onProgressBarClick($event)" (mousemove)="onProgressHover($event)" (mouseover)="onProgressMouseEnter($event)" (mouseout)="onProgressMouseLeave($event) ">
+                  <div class="time_bar" [style.width.%]="perc"></div>
+                  <div class="buffer_bar" [style.width.%]="bufferPerc" ></div>
+                  <div class="time_on_progress_hover" #timePreview [style.left.%]="cirTemp" >{{timeOnTemp}}</div>
+                  <video id="canvas" #videoPreview [style.left.%]="cirTemp" muted style="width: 125px;
+                  bottom: 50px;
+                  position: absolute;">
+                    <source src="{{recievedData.url}}" type="video/mp4">
+                  </video>
+                </div>
+                <div class="controls_bottom_container">
+                  <div class="left">
+                    <span>
+                      <button (click)="playPause()">
+                        <mat-icon *ngIf="showPlay">play_arrow</mat-icon>
+                        <mat-icon *ngIf="!showPlay">pause_arrow</mat-icon>
+                      </button>
+                    </span>
+                    <span>
+                      <button (click)="fastBack()">
+                        <mat-icon>replay_10</mat-icon>
+                      </button>
+                    </span>
+                    <span>
+                      <button (click)="fastGo()">
+                        <mat-icon>forward_10</mat-icon>
+                      </button>
+                    </span>
+                    <span>
+                      {{videoCurrentTimeToShow}} / 
+                      {{videoDurationToShow}}
+                    </span>
+                  </div>
+                  <div class="right" style="position: relative;">
+                    
+                      <button class="setting_btn" (click)="toggleSettingPopover()">
+												<mat-icon>settings</mat-icon>
+											</button>
+                    
+                      <button (click)="reqPicInPicMode()"><mat-icon>screenshot_monitor</mat-icon></button>
+                   
+                      <button (click)="reqFullScreen()"><mat-icon>fit_screen</mat-icon></button>
+                    
+											<!-- setting menu -->
+											<div class="setting_popover" *ngIf="settingPopoverFlag">
+												<div class="setting_menu_popover" *ngIf="settingMenuPopoverFlag">
+													<ul>
+														<li>
+															<a href="javascript:void(0)" (click)="showSetting_speed_popover()">
+																<span>Speed</span>
+																<span>Normal ></span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)" (click)="showSetting_quality_popover()">
+																<span>Quality</span>
+																<span>360p ></span>
+															</a>
+														</li>
+													</ul>
+												</div>
+												<div class="setting_speed_popover" *ngIf="settingSpeedPopoverFlag">
+													<button type="button" (click)="backToSettingPopover()">< Playback Speed</button>
+													<ul>
+														<li>
+															<a href="javascript:void(0)">
+																<span>0.25</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)">
+																<span>0.5</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)">
+																<span>0.75</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)">
+																<span>Normal</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+
+												<!-- quality -->
+												<div class="setting_quality_popover" *ngIf="settingQualityPopoverFlag">
+													<button type="button" (click)="backToSettingPopover()">< Quality</button>
+													<ul>
+														<li>
+															<a href="javascript:void(0)">
+																<span>720p</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)">
+																<span>480p</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)">
+																<span>360p</span>
+															</a>
+														</li>
+														<li>
+															<a href="javascript:void(0)">
+																<span>240p</span>
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </div> 
       
     </div>
