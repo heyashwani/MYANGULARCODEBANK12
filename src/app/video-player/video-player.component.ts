@@ -1,10 +1,11 @@
-import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 
 
 @Component({
   selector: 'app-video-player',
   templateUrl: './video-player.component.html',
-  styleUrls: ['./video-player.component.css']
+  styleUrls: ['./video-player.component.css'],
+  encapsulation:ViewEncapsulation.None
 })
 export class VideoPlayerComponent implements OnInit {
 
@@ -26,6 +27,8 @@ export class VideoPlayerComponent implements OnInit {
   videoCurrentBufferTime: any;
   bufferPerc: number;
   cirTemp: number;
+  cirTemp1: number;
+  cirTemp2: number;
   timeOnTemp: any;
   canvas: any;
   showPlay:boolean = true;
@@ -35,6 +38,8 @@ export class VideoPlayerComponent implements OnInit {
   settingMenuPopoverFlag:boolean = true;
   settingSpeedPopoverFlag:boolean = false;
   settingQualityPopoverFlag:boolean = false
+  
+  
 
   
   
@@ -87,8 +92,6 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   playPause() { 
-    console.log(this.myVideo.currentTime) 
-    console.log(this.myVideo.duration)
     if (this.myVideo.paused){
       this.myVideo.play(); 
       this.showPlay = false;
@@ -104,7 +107,6 @@ export class VideoPlayerComponent implements OnInit {
     if (this.myFlag == 0) {
       this.myFlag = 1
       this.vidCont.requestFullscreen();
-      console.log("sdfasfafsa fss")
     }
     else{
       this.myFlag = 0
@@ -124,7 +126,6 @@ export class VideoPlayerComponent implements OnInit {
     this.perc = (this.videoCurrentTime / this.videoDuration ) * 100;
     
     this.videoCurrentBufferTime = this.myVideo.buffered.end(0);
-    console.log(this.myVideo.buffered.end(0))
     this.bufferPerc = (this.myVideo.buffered.end(0) / this.myVideo.duration) * 100
     
   
@@ -148,7 +149,6 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   onProgressBarClick(e:any){
-    console.log(e.pageX)
     var position = e.pageX - document.getElementById("ask_progress_container").offsetLeft;
     // console.log($progress.offset().left)
     this.perc = 100 * (position / document.getElementById("ask_progress_container").clientWidth);
@@ -160,11 +160,19 @@ export class VideoPlayerComponent implements OnInit {
   onProgressHover(e:any){
     
     var position = e.pageX - document.getElementById("ask_progress_container").offsetLeft;
+    
     this.cirTemp = 100 * (position / document.getElementById("ask_progress_container").clientWidth);
+    console.log("--0000>>>",this.cirTemp)
+    if(this.cirTemp <= 85){
+      this.cirTemp1 = this.cirTemp
+    }
+    if(this.cirTemp <= 93){
+      this.cirTemp2 = this.cirTemp
+    }
+    
     this.timeOnTemp = (this.myVideo.duration * this.cirTemp) / 100;
     let timeOn = this.timeOnTemp
     this.timeOnTemp = this.time_format(this.timeOnTemp)
-    // console.log(this.timeOnTemp)
 
     var canvas = document.getElementById('canvas');
     this.canvas.currentTime  = timeOn
@@ -173,13 +181,11 @@ export class VideoPlayerComponent implements OnInit {
   }
 
   onProgressMouseEnter(e:any){
-    console.log("sdfa")
     this._renderer.removeClass(this.videoPreview.nativeElement, "myClass")
     this._renderer.removeClass(this.timePreview.nativeElement, "myClass")
   }
 
   onProgressMouseLeave(e:any){
-    console.log("sdfa")
     this._renderer.addClass(this.videoPreview.nativeElement, "myClass")
     this._renderer.addClass(this.timePreview.nativeElement, "myClass")
   }
@@ -211,6 +217,12 @@ export class VideoPlayerComponent implements OnInit {
     this.settingMenuPopoverFlag = true;
     this.settingSpeedPopoverFlag = false;
     this.settingQualityPopoverFlag = false;
+  }
+
+  SetVolume(e:any)
+  {
+      
+      this.myVideo.volume = e.target.value / 100;
   }
   
 
